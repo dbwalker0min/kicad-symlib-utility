@@ -1,0 +1,5 @@
+# Requirements for kicad-symlib-utility
+# This file is for compatibility with pip-based environments
+# The canonical dependencies are defined in pyproject.toml
+
+sexpdata>=1.0.2
