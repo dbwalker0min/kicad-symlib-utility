@@ -126,6 +126,8 @@ class KiCadSymbolLibrary:
         modify_symbol_sections(symbol_sexp: list, sections: list[str], mode: str) -> list:
         derive_symbol_from(new_symbol_name: str, template_symbol_name: str, properties: dict[str, str]) -> None:
             Creates a new symbol derived from a template symbol with specified properties.
+        get_all_symbols() -> dict[str, dict[str, str]]:
+            Returns a dictionary of all symbol names and their properties in the library.
         write_library(output_path: Path | None = None) -> None:
     """
 
@@ -395,14 +397,14 @@ class KiCadSymbolLibrary:
         # Update properties
         self.modify_properties(new_symbol_name, properties)
 
-    def get_symbol_names(self) -> list[str]:
+    def get_all_symbols(self) -> dict[str, dict[str, str]]:
         """
-        Returns a list of all symbol names in the library.
+        Returns a dictionary of all symbols and their properties in the library.
 
         Returns:
-            list[str]: A list of symbol names.
+            dict[str, dict[str, str]]: A dictionary mapping symbol names to their properties.
         """
-        return list(self._symbols.keys())
+        return {name: self.get_symbol_properties(name) for name in self._symbols.keys()}
 
     def write_library(self, output_path: Path | None = None) -> None:
         """
